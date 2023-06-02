@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
-
+use App\Http\Controllers\PostController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,5 +19,12 @@ Route::get('/', function () {
 });
 
 Route::get("/home", [HomeController::class, "getHomePage"]);
+
+Route::get("/posts/{id}", [PostController::class, "getById"])->where('id', '[0-9]+');;
+
+Route::get("/posts/published", [PostController::class, "getAllPublished"]);
+
+Route::get("/posts", [PostController::class, "getAll"]);
+
 
 
