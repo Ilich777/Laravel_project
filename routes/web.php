@@ -29,6 +29,7 @@ Route::get("/posts", [PostController::class, "getAll"]);
 
 Route::group(["prefix" => "product"], function () {
     Route::post("/add", [ProductController::class, "add"]);
+    Route::put("/edit/{id}", [ProductController::class, "edit"]);
 
 });
 

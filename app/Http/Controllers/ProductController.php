@@ -9,26 +9,31 @@ use GuzzleHttp\Promise\Promise;
 use GuzzleHttp\Exception\RequestException;
 use Illuminate\Support\Facades\Http;
 use GuzzleHttp\Promise\Utils;
+use Illuminate\Support\Facades\DB;
+
 
 class ProductController extends Controller
 {
+    public $url = "https://online.moysklad.ru/api/remap/1.2/entity/product/";
+
     public function add(Request $request) {
         $body = $request->all();
-
-        $url = "https://online.moysklad.ru/api/remap/1.2/entity/product";
         $token = getenv('TOKEN');
         $auth = 'Bearer ' . $token;
+
         $headers = [
             'Authorization' => $auth,
             'Content-Type' => 'application/json'
         ];
         $client = new Client(['verify' => false]);
-        $promise = $client->postAsync($url, [
+        $promise = $client->postAsync($this->url, [
             'headers' => $headers,
             'json' => $body,
         ]);
         return $promise->then(function ($response) {
             $responseData = json_decode($response->getBody(), true);
+            DB::insert('insert into products (productId) values (?)', [$responseData["id"]]);
+            //some properties can be added here.
             $data = [
                 'id' => $responseData["id"],
                 'accountId' => $responseData["accountId"],
@@ -36,8 +41,32 @@ class ProductController extends Controller
                 'code' => $responseData["code"]
             ];
             $result = new Response($data, $response->getStatusCode());
-            return $data;
+            return $result;
         })->wait();
+
+    }
+
+    public function edit(Request $request, $id) {
+        $body = $request->all();
+        $joinedUrl = $this->url . $id;
+        $token = getenv('TOKEN');
+        $auth = 'Bearer ' . $token;
+        $headers = [
+            'Authorization' => $auth,
+            'Content-Type' => 'application/json'
+        ];
+        $client = new Client(['verify' => false]);
+
+        $promise = $client->putAsync($joinedUrl, [
+            'headers' => $headers,
+            'json' => $body,
+        ]);
+        return $promise->then(function ($response) {
+            $responseData = json_decode($response->getBody(), true);
+            $result = new Response($responseData, $response->getStatusCode());
+            return $result;
+        })->wait();
+
 
     }
 
