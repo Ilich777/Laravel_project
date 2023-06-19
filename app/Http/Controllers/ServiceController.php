@@ -5,15 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use GuzzleHttp\Client;
-use GuzzleHttp\Promise\Promise;
-use GuzzleHttp\Exception\RequestException;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\DB;
 
-
-class ProductController extends Controller
+class ServiceController extends Controller
 {
-    public $url = "https://online.moysklad.ru/api/remap/1.2/entity/product/";
+    public $url = "https://online.moysklad.ru/api/remap/1.2/entity/service/";
 
     public function add(Request $request) {
         $body = $request->all();
@@ -31,12 +27,12 @@ class ProductController extends Controller
         ]);
         return $promise->then(function ($response) {
             $responseData = json_decode($response->getBody(), true);
-            DB::insert('insert into assortment (productId, type) values (?, ?)', [$responseData["id"], "product"]);
+            DB::insert('insert into assortment (productId, type) values (?, ?)', [$responseData["id"], "service"]);
             //some properties can be added here.
             $data = [
                 'id' => $responseData["id"],
                 'accountId' => $responseData["accountId"],
-                'product' => $responseData["name"],
+                'service' => $responseData["name"],
                 'code' => $responseData["code"]
             ];
             $result = new Response($data, $response->getStatusCode());
@@ -68,5 +64,4 @@ class ProductController extends Controller
 
 
     }
-
 }

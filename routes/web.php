@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\CounterpartyController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,6 +32,18 @@ Route::get("/posts", [PostController::class, "getAll"]);
 Route::group(["prefix" => "product"], function () {
     Route::post("/add", [ProductController::class, "add"]);
     Route::put("/edit/{id}", [ProductController::class, "edit"]);
+
+});
+
+Route::group(["prefix" => "service"], function () {
+    Route::post("/add", [ServiceController::class, "add"]);
+    Route::put("/edit/{id}", [ServiceController::class, "edit"]);
+
+});
+
+Route::group(["prefix" => "counterparty"], function () {
+    Route::post("/add", [CounterpartyController::class, "add"]);
+    Route::put("/edit/{id}", [CounterpartyController::class, "edit"]);
 
 });
 
