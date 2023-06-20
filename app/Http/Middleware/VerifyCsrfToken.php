@@ -14,6 +14,8 @@ class VerifyCsrfToken extends Middleware
     protected $except = [
         "/product/*",
         "/service/*",
-        "/counterparty/*"
+        "/counterparty/*",
+        "/storehouse/*",
+        "/productfolder/*"
     ];
 }

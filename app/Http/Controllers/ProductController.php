@@ -31,7 +31,7 @@ class ProductController extends Controller
         ]);
         return $promise->then(function ($response) {
             $responseData = json_decode($response->getBody(), true);
-            DB::insert('insert into assortment (productId, type) values (?, ?)', [$responseData["id"], "product"]);
+            DB::insert('insert into assortments (foreignUUID, type) values (?, ?)', [$responseData["id"], "product"]);
             //some properties can be added here.
             $data = [
                 'id' => $responseData["id"],

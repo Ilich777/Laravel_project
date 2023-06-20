@@ -27,7 +27,7 @@ class CounterpartyController extends Controller
         ]);
         return $promise->then(function ($response) {
             $responseData = json_decode($response->getBody(), true);
-            DB::insert('insert into counterparties (foreignUUID) values (?)', [$responseData["id"]]);
+            DB::insert('insert into assortments (foreignUUID, type) values (?, ?)', [$responseData["id"], "counterparty"]);
             //some properties can be added here.
             $data = [
                 'id' => $responseData["id"],

@@ -7,9 +7,9 @@ use Illuminate\Http\Response;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\DB;
 
-class ServiceController extends Controller
+class StorehouseController extends Controller
 {
-    public $url = "https://online.moysklad.ru/api/remap/1.2/entity/service/";
+    public $url = "https://online.moysklad.ru/api/remap/1.2/entity/store/";
 
     public function add(Request $request) {
         $body = $request->all();
@@ -27,7 +27,6 @@ class ServiceController extends Controller
         ]);
         return $promise->then(function ($response) {
             $responseData = json_decode($response->getBody(), true);
-            DB::insert('insert into assortments (foreignUUID, type) values (?, ?)', [$responseData["id"], "service"]);
             //some properties can be added here.
             $data = [
                 'id' => $responseData["id"],

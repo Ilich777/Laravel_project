@@ -6,6 +6,8 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\CounterpartyController;
+use App\Http\Controllers\StorehouseController;
+use App\Http\Controllers\ProductfolderController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -46,6 +48,19 @@ Route::group(["prefix" => "counterparty"], function () {
     Route::put("/edit/{id}", [CounterpartyController::class, "edit"]);
 
 });
+
+Route::group(["prefix" => "storehouse"], function () {
+    Route::post("/add", [StorehouseController::class, "add"]);
+    Route::put("/edit/{id}", [StorehouseController::class, "edit"]);
+
+});
+
+Route::group(["prefix" => "productfolder"], function () {
+    Route::post("/add", [ProductfolderController::class, "add"]);
+    Route::put("/edit/{id}", [ProductfolderController::class, "edit"]);
+
+});
+
 
 
 
