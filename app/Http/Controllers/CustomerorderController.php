@@ -7,9 +7,9 @@ use Illuminate\Http\Response;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\DB;
 
-class StorehouseController extends Controller
+class CustomerorderController extends Controller
 {
-    public $url = "https://online.moysklad.ru/api/remap/1.2/entity/store/";
+    public $url = "https://online.moysklad.ru/api/remap/1.2/entity/customerorder/";
 
     public function add(Request $request) {
         $body = $request->all();
@@ -27,14 +27,7 @@ class StorehouseController extends Controller
         ]);
         return $promise->then(function ($response) {
             $responseData = json_decode($response->getBody(), true);
-            //some properties can be added here.
-            $data = [
-                'id' => $responseData["id"],
-                'accountId' => $responseData["accountId"],
-                'storehouse' => $responseData["name"],
-                'code' => $responseData["code"]
-            ];
-            $result = new Response($data, $response->getStatusCode());
+            $result = new Response($responseData, $response->getStatusCode());
             return $result;
         })->wait();
 

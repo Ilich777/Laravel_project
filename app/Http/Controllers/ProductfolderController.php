@@ -31,7 +31,7 @@ class ProductfolderController extends Controller
             $data = [
                 'id' => $responseData["id"],
                 'accountId' => $responseData["accountId"],
-                'service' => $responseData["name"],
+                'product folder' => $responseData["name"],
                 'code' => $responseData["code"]
             ];
             $result = new Response($data, $response->getStatusCode());
