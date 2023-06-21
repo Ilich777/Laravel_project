@@ -9,6 +9,7 @@ use App\Http\Controllers\CounterpartyController;
 use App\Http\Controllers\StorehouseController;
 use App\Http\Controllers\ProductfolderController;
 use App\Http\Controllers\CustomerorderController;
+use App\Http\Controllers\DemandController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -65,6 +66,12 @@ Route::group(["prefix" => "productfolder"], function () {
 Route::group(["prefix" => "customerorder"], function () {
     Route::post("/add", [CustomerorderController::class, "add"]);
     Route::put("/edit/{id}", [CustomerorderController::class, "edit"]);
+
+});
+
+Route::group(["prefix" => "demand"], function () {
+    Route::post("/add", [DemandController::class, "add"]);
+    Route::put("/edit/{id}", [DemandController::class, "edit"]);
 
 });
 

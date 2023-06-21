@@ -6,9 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use GuzzleHttp\Client;
 
-class CustomerorderController extends Controller
+class DemandController extends Controller
 {
-    public $url = "https://online.moysklad.ru/api/remap/1.2/entity/customerorder/";
+    public $url = "https://online.moysklad.ru/api/remap/1.2/entity/demand/";
 
     public function add(Request $request) {
         $body = $request->all();
