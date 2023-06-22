@@ -18,6 +18,9 @@ class VerifyCsrfToken extends Middleware
         "/storehouse/*",
         "/productfolder/*",
         "/customerorder/*",
-        "/demand/*"
+        "/demand/*",
+        "/salesreturn/*",
+        "/paymentin/*",
+        "/cashin/*"
     ];
 }

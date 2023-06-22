@@ -10,6 +10,9 @@ use App\Http\Controllers\StorehouseController;
 use App\Http\Controllers\ProductfolderController;
 use App\Http\Controllers\CustomerorderController;
 use App\Http\Controllers\DemandController;
+use App\Http\Controllers\SalesreturnController;
+use App\Http\Controllers\PaymentinController;
+use App\Http\Controllers\CashinController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -74,6 +77,25 @@ Route::group(["prefix" => "demand"], function () {
     Route::put("/edit/{id}", [DemandController::class, "edit"]);
 
 });
+
+Route::group(["prefix" => "salesreturn"], function () {
+    Route::post("/add", [SalesreturnController::class, "add"]);
+    Route::put("/edit/{id}", [SalesreturnController::class, "edit"]);
+
+});
+
+Route::group(["prefix" => "paymentin"], function () {
+    Route::post("/add", [PaymentinController::class, "add"]);
+    Route::put("/edit/{id}", [PaymentinController::class, "edit"]);
+
+});
+
+Route::group(["prefix" => "cashin"], function () {
+    Route::post("/add", [CashinController::class, "add"]);
+    Route::put("/edit/{id}", [CashinController::class, "edit"]);
+
+});
+
 
 
 
